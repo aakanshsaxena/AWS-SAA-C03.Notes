@@ -1,0 +1,20 @@
+- A tool that lets you create, update, and delete infrastructure in AWS in a predictable and repeatable way using templates.
+- Uses templates to create AWS infrastructure, update and reapply it to update infrastructure, or delete it.
+- Uses either YAML or JSON
+- Breakdown of components of template:
+	- Resources (MANDATORY) - tells CloudFormation what to do 
+	- Description - free text field for author to add a description
+	- If you are using AWSTemplateFormatVersion + Description, then description must immediately follow AWSTemplateFormatVersion
+	- Metadata - controls the UI
+	- Parameters - where you can add fields that prompt user for more info
+	- Mappings - allows you to create lookup tables
+	- Conditions - allow decision-making within a template, two steps: create a condition, condition used within resources of template
+	- Outputs
+### CloudFormation Template Usage
+- Example: Template that creates EC2 instance
+- Resources = logical resources, in this case an instance
+	- Logical resources have a type ('AWS::EC2::Instance')
+	- They also have properties which help CloudFormation create the resource in a specific way
+- CloudFormation takes resources and turns them into a stack which contains all the logical resources that the template contains
+- For any logical resources in the stack, CloudFormation makes a physical resource in your AWS account -> (logical resource: AWS EC2, physical resource: EC2 instance)
+- Template -> creates a stack with logical resources inside -> create physical resources that match 

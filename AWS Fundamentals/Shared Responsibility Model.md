@@ -1,0 +1,11 @@
+- AWS - responsible for security of the cloud
+	- Regions, AZ, Edge Locations (Hardware/AWS Global Infrastructure)
+	- Compute, Storage, Database, Networking
+	- Software that assists AWS services
+- Costumer - responsible for security in the cloud
+	- Client-side data encryption, integrity & authentication
+	- Server-side encryption
+	- Networking traffic protection
+	- OS, Network, Firewall Configuration
+	- Platform, Apps, IAM
+	- Customer Data

@@ -1,0 +1,15 @@
+- A product that collects and manages operational data
+- CloudWatch can be thought of as three main parts:
+	- CloudWatch Metrics - AWS Products, Apps, on-premises (ex: EC2 CPU Util)
+	- CloudWatch Logs - AWS Products, Apps, on-premises (allows for collection, monitoring, and actions based on logging data)
+	- CloudWatch Events - AWS Services & Schedules
+- CloudWatch takes the sources of data (AWS services or your own data, which is managed as metrics, can be viewed through console/CLI/or take actions through alarms)
+- Namespace - Container for monitoring data, all AWS data goes into an AWS namespace - AWS/*service*
+- Metric - a collection of related data points in a time ordered structure (CPU Usage, Network IN/OUT, Disk IO)
+- For example, CPU utilization: every time server reports its CPU usage = datapoint. Datapoint is a timestamp + value
+- Dimensions are used to separate out datapoints.
+- Along with datapoints, dimensions are sent to help CloudWatch separate datapoints for different or perspective within the same metric.
+- AWS also send InstanceID and InstanceType along with datapoints as dimensions
+### Alarms
+- Created and linked to a specific metric, based on how you configure alarm they will take an action based on that metric
+- Three states: OK, ALARM, INSUFFICIENT_DATA
