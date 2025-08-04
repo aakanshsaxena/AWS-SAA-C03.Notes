@@ -1,0 +1,14 @@
+- Contains for IAM Users
+- Can't login into IAM Groups (no credentials exist)
+- Used solely for organizing IAM users 
+- IAM user can be a part of multiple IAM groups
+- Groups can have both inline or managed policies attached to them
+- AWS merges any policies attached to an identity together
+- Deny allow deny
+- IAM user can be part of 10 groups
+- No built-in all users group in IAM
+- No nesting (no groups within groups)
+- Limit of 300 groups per account (but can be raised with a support ticket)
+- Can reference IAM Users/Roles for a resource policy using ARN
+	- Groups are not a true identity -> we cannot reference them as a principal in a policy. AKA we can't grant a group access via a resource policy
+	- 

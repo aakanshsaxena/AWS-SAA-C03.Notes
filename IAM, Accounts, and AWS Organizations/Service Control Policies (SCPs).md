@@ -1,0 +1,10 @@
+- Can be attached to the entirety of the root container, can be attached to 1+ OUs, or can be attached directly to individual AWS accounts
+- Management account is never effected by service control policies
+- SCPs are account permission boundaries, limit what the account can do
+- They don't grant any permissions, they just limit what can be assigned 
+- Can set it up as either an Allow or Deny List
+	- Allow List - Block by default
+	- Deny List - Allow by default
+	-  SCP default is a deny list
+- SCPs allow us to grant access to AWS services. 
+	- In order for an account to have access to an AWS service, it needs to have access allowed by an SCP and then granted by an identity policy. AKA the overlap between any identity policies and SCPs.

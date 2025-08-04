@@ -1,0 +1,18 @@
+- Logs API actions which affect AWS accounts
+- 90 days of history stored by default in Event History at no cost - enabled by default 
+- To customize - create 1+ trails
+- Management events - control plane events (ex. creating an EC2 instance), data events - (ex. uploading a file into an S3 bucket/anyone accessing an S3 bucket), insight events
+- By default, only management events are logged 
+- CloudTrail is a regional service
+- A trail logs events for the AWS region that it is configured in, either one region or all regions
+- Organizational trail is another type - a CloudTrail trail created by the management account of an organization can store all the information for all the accounts within the organization
+- All region trail is a collection of one region trails
+- Must have global service events turned on if you want to log any data regarding global services (IAM, CloudFront, STS)
+- Trails can be stored indefinitely into an S3 bucket
+- CloudTrail can log into CloudWatch logs
+Exam Tips
+- CloudTrail is enabled by default with 90 day history
+- Trails are how you configure S3 and CWLogs
+- Management events are the only ones logged by default
+- IAM, STS, CloudFront = Global Service Events, and must be enabled if you want to log these. They also log to US-East-1
+- CloudTrail is not the product if you want real-time logging, there is a delay

@@ -1,0 +1,3 @@
+- Templates can have an optional Outputs section
+- Values can be declared in this section which are visible as outputs when using the CLI, in the console UI
+- Can be accessible from a parent stack when using nesting, and can be exported which allows for cross-stack references

@@ -1,0 +1,14 @@
+- AWS Services (Ex: AWS Lambda)
+	- By default a Lambda function has no permissions, so we create an IAM Role = Lambda Execution Role -> which trusts AWS Lambda -> permissions policy that allows access to AWS services. Uses sts:AssumeRole operation -> STS generates temporary security credentials and then the runtime environment that the Lambda function runs in can use these temp. credentials to access AWS resources based on permissions the roles permission policy has.
+- Always the preferred option when using AWS services to do something on your behalf, use a role, because you don't need to provide static credentials.
+- Emergency or out of the usual situations
+	- For example, Wayne works in a help desk role (typically only needs read-only permissions). However, there are "break glass if in emergency" situations - like if at 3AM (unusual time) a customer needs help that would typically require a supervisor (who isn't available). In this case, Wayne can assume the "emergency role" which gives him elevated permissions and allows him to help the customer for a temporary time. This protects everyone, Wayne is limited to least privilege for his job, but when absolutely needed he can assume an elevated role.
+- When adding AWS to an existing corporate environment
+	- Let's say we have an existing environment in MS Active Directory. We know that we can't use external accounts directly in AWS, so we can use Roles. We can create a Role, so that the external identity assumes the role -> they are given temporary credentials -> they can use these temporary credentials to access AWS resources.
+- Designing the architecture for a popular mobile application
+	- Let's say we have a mobile application with millions of users. The users can use web identities (Google, Twitter) to log in to the app using web federation. We can then assign them trust-based roles to give them access to AWS resources as needed.
+		- Beneficial in many ways: no AWS credentials saved on the app, uses existing customer logins, scales to hundreds of millions of accounts
+	- If there are test questions on how to architect solutions for mobile applications, ID federation is often the solution
+- Cross account access
+	- Let's say we have two AWS accounts, our company which has thousands of identities, and a partner company. We share data with our partner company that we want the partner company to own (for instance we analyze their data and provide them the analysis). For this, the partner account can create an AWS role for our AWS account, that way any identity in our AWS account can assume the role and get temporary security credentials to upload files as needed to the partners AWS account S3, and these files are owned by the partner. 
+	- We can use roles to give access to specific AWS services or to give access to a whole account.

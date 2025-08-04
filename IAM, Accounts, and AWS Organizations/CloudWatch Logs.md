@@ -1,0 +1,12 @@
+- CW Logs are a public service = usable from AWS or on-premises
+- Store, monitor, and access logging data
+- Built in integrations with other AWS services
+- We can log products and services outside of AWS by using a CloudWatch agent
+- Can generate metrics based on logs - metric filter
+- Regional service
+- Log streams = log events from the same source
+- Log groups = containers for multiple log streams
+	- For example, we have VAR logs (default Linux Logs) for 3 EC2 instances,
+	- Each EC2 instance gets its own log streams, and we can create a log group for the three
+- We store configuration settings on the log group -> applies to all log streams within the group
+- We also define metric filters on the log groups

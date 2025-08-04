@@ -1,0 +1,10 @@
+- Special type of IAM Role
+	- IAM Role linked to a specific AWS service
+	- Provide a set of permissions that is predefined by a service
+	- Providing permissions that a service needs to interact with other AWS services on your behalf
+	- Service might create/delete the role, or allow you to during the setup or within IAM
+	- Key difference is that you can't delete the role until it's no longer required 
+- Role separation = giving one group of people the ability to create roles and another group of people the ability to use them
+- Pass-role permission = use preexisting role with a service but not create or edit the role
+- By default when you create a CloudFormation stack, CloudFormation uses the permissions of your identity to interact with AWS
+- 

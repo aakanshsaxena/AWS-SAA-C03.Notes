@@ -1,0 +1,10 @@
+- Generally best suited to be used by an unknown number or multiple principals
+- Or if you have over 5,000 principals, you can use roles to bypass limit for IAM users
+- Generally used on temporary basis, something becomes the role for a short period of time and then stops 
+- Roles don't respond you, they represent a level of access in an AWS account
+- IAM Roles have two types of policies associated with them:
+	- Permission policy - What services the role is allowed to use
+	- Trust policy - controls which identities can assume that role (can reference other IAM users, roles, AWS services, or identities in other AWS accounts, allow anonymous usage of that role).
+		- If identity is allowed to assume role, then IAM Role generates temporary security credentials. Once they expire, identity will need to renew by reassuming the role.
+- STS = Secure Token Service -> generates the temporary security credentials (sts:AssumeRole)
+- When you use AWS services, you need to use an AWS identity

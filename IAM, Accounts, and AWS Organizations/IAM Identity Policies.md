@@ -1,0 +1,21 @@
+- Grants access or denies access to AWS products or features to any identity that uses that policy
+- Creates JSON
+- All an IAM Policy Document is is multiple statements -> these statements deny or allow access to AWS products/features
+- Statement only applies if interaction with AWS matches action + resource
+- What makes up a statement
+	- Optional - Sid (Statement ID)
+	- Effect - Allow/Deny
+	- Action - Action being taken (can be specific s3:specific or general s3:*)
+	- Resource - AWS resource being used
+- When an overlap exists (one allows and one denies)
+	- Start with first priority: explicit deny
+	- Second priority: explicit allow
+	- Last priority: Default deny (Implicit)
+- Two main types of policies: inline and managed
+	- Difference is how they're managed
+	- Assign the same JSON policies individually to ___ accounts = inline
+	- Managed policy are created as their own object and then these are assigned to identities.
+		- AWS Managed Policies = made by AWS
+		- Customer Managed Policies = created and managed by you
+	- Inline, not reusable, any changes in policy would need to be individually within each identity. Managed policy is reusable and can be assigned and changed at will to all the identities its attached to automatically.
+	- Inline is normally used for special or exceptional allow or denies.

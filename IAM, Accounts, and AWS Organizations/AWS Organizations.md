@@ -1,0 +1,13 @@
+- Allows larger businesses to manage multiple AWS accounts
+- Take a single standard AWS account (standard AWS account = an AWS account not in an organization)
+	- Create an AWS organization with a standard AWS account, organization is not created within the AWS account.
+	- The account that you created the organization with becomes the Management Account (/Master account) for the Organization 
+	- Invite other standard AWS accounts using your management account, when they accept they are part of being your organization
+	- This means they go from being a standard account to a member account
+	- Organizations only have one management account
+- You can create a structure within an AWS organization (hierarchical)
+- Service Control Policies (SCPs) let you control what AWS accounts within the organization can do
+- Organizations change some best practices
+	- For example, we don't need to create IAM users within each AWS account
+	- Instead, we can use IAM roles to allow IAM users to access other AWS accounts
+- 
