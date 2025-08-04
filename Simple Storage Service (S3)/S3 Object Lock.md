@@ -1,0 +1,21 @@
+- Automatically enabled on 'new' buckets
+- Write-Once-Read-Many (WORM) - No delete, no overwrite
+- Requires versioning to be enabled - individual versions are locked
+- Two types (should be thought about as seperate)
+	- Retention Period
+	- Legal Hold
+- Can use none, one, or both
+- Can either use object lock settings on specific objects or have a default setting for the whole bucket
+Retention
+- Specify a retention period (days and years)
+- Compliance - can't be adjusted, deleted, or overwritten even by account root user until retention expires
+	- **Make sure that this is the retention mode you intend because once you set you can't change it**
+- Governance - special permissions can be granted allowing lock settings to be adjusted
+- s3:BypassGovernanceRetention (allows you to bypass)
+- x-amz-bypass-governance-retention:true (console default)
+Legal Hold
+- Either on or off with no retention
+- No deletes or changes until removed
+- s3:PutObjectLegalHold is required to add or remove
+- Prevent accidental deletion of critical object versions (similar to Governance Retention without a time limit)
+- Can use multiple modes together (ex. compliance with legal hold)

@@ -1,0 +1,8 @@
+- Help S3 scale and reduce costs when using KMS encryption
+- Normally, every time we put an object into a bucket that is encrypted with SSE-KMS encryption, it generates a new DEK for every object. This is not scalable and can raise costs because of the amount of API calls made.
+- Instead, we use a KMS key to generate a time limited bucket key that is used to generate DEKs within S3
+- This is conceptually given to the bucket.
+- Offloads the work from KMS to S3, decreases API calls to KMS and increases scalability and reduces cost.
+- CloudTrail KMS events now show the bucket ARN instead of the object ARN
+- Bucket keys work with same and cross region replication and preserves encrypted settings
+- If replicating plaintext to a bucket using bucket keys, the object is encrypted at the destination side using the destination encryption config settings (this can result in ETAG changes)

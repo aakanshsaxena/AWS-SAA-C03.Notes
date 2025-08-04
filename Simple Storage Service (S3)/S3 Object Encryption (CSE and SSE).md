@@ -1,0 +1,33 @@
+- *Important to note that buckets aren't encrypted, objects are*
+- Generally data in transit between user/app and S3 bucket are encrypted
+- CSE vs SSE
+	- In CSE, the data is encrypted the whole way. In the HTTPS tunnel from user to S3, S3 to S3 storage.
+	- Essentially, the data is uploaded in an encrypted form by the user, S3 is never allowed to see the plaintext data.
+	- YOU are responsible for managing the keys and security of the data
+	- Use when you need to be in management of the keys and encryption and decryption process of data
+	- In SSE, the data is transferred securely via an HTTPS tunnel between the user and the app. The S3 bucket has access to the plaintext data here.
+	- Then it encrypts it between the S3 bucket and the S3 storage. 
+	- Regardless of both, the data is stored in an encrypted form at rest in the S3 storage.
+**SSE**
+- SSE-C (SSE with customer created key)
+	- We upload the plaintext file and the key
+	- S3 manages the encryption and stores the ciphertext object with the key hash and deletes the key hash and then stores.
+	- Decrypt process: check the key hash against our key, once verified, S3 handles the decryption and disposes of our key and gives us plaintext back.
+	- Useful because S3 performs the encryption and decryption, and we can manage the keys (helpful in regulation heavy environments), but we need to trust that AWS will dispose of the keys
+- SSE-S3 (AES256)
+	- We provide the plaintext data to the S3 bucket
+	- S3 creates an object key (remember each object is encrypted by itself), and then encrypts this object key with the S3 key and disposes of the original S3 key
+	- It encrypts the plaintext into ciphertext and stores it along with the encrypted object key in S3 storage.
+	- AWS handles the creation + management of keys, and encryption and decryption of data.
+	- For most situations, SSE-S3 is a good default type of encryption UNLESS
+		- You need to manage the keys used and control access to the keys
+		- You need control rotation of keys
+		- You need role separation (for example SysAdmin group should only be allowed to manage the infrastructure but can't be allowed to access data within objects. Not possible with SSE-S3)
+- SSE-KMS
+	- We create the key within KMS, managed by us as well.
+	- Upload the data into S3 as plaintext
+	- The KMS Key provides a plaintext and ciphertext DEK, that S3 uses to encrypt the plaintext file and then disposes of the plaintext key.
+	- S3 stores the ciphertext file and ciphertext DEK in S3 storage.
+	- Because we manage the KMS key, you must have access to the specific KMS key to be able to decrypt the DEK stored with the S3 object in order to decrypt the file.
+	- This allows granular access, and also means someone who is an S3 admin cannot access the data unless they also have permissions for the specific KMS key.
+	![[S3 Object Encryption Image.png]]

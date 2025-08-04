@@ -1,0 +1,17 @@
+- Function as a Service (FaaS) - short running & focused
+- Lambda function is a piece of code lambda runs
+- Functions use a runtime (e.g. Python 3.8)
+- Functions are loaded and run in a runtime environment
+- The environment has a direct memory (indirect CPU) allocation
+- You are billed for the duration that a function runs
+- Key part of a serverless architecture
+- Common Runtimes: Python, Ruby, Java, Go, C#
+- We upload a dev package to Lambda which then executes the code when invoked in its runtime environment, using execution roles (like IAM Roles but for Lambda functions)
+- There is a 900s/15m function timeout for Lambda functions
+- Common run times like Rust are available to use through layers
+Common uses
+- Serverless applications - S3, API Gateway, Lambda
+- File Processing - S3, S3 Events, Lambda
+- Database Triggers - DynamoDB, Streams, Lambda
+- Serverless CRON - EventBridge/CWEvents + Lambda
+- Realtime Stream Data Processing - Kinesis + Lambda

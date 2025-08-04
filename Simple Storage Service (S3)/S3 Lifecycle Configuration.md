@@ -1,0 +1,13 @@
+- Automatically transition or expire objects in a bucket - helps optimize costs
+- A Lifecycle configuration is a set of rules, that consist of actions on a Bucket or groups of objects
+- These can be transition actions - for example rules that transition an object from S3 Standard -> IA -> Glacier Deep Archive
+- Expiration Actions - which delete objects/versions
+- This automates these actions, but it's important to note that S3 Intelligent Tiering can move objects in between classes, this is for more specific instances
+	- For example, if we have a well defined lifecycle for data, where it's used frequently, then it's used less often after 30 days, then it's used rarely after 90 days, and then we can delete it, we can set up rules for this.
+S3 Lifecycle Configuation - Transitions
+- Flows like a waterfall (besides S3 One-Zone IA cannot become S3 Glacier - Instant Retrieval)
+	- S3 Standard -> Standard-IA -> Intelligent Tiering -> One-Zone IA ->  Glacier - Instant Retrieval -> Flexible Retrieval -> Deep Archive
+- Things to note:
+	- Be careful with smaller objects - the size minimums on some tiers may end up having the same costs as if they were in S3 Standard
+	- Data must remain in S3 Standard for a minimum of 30 days before being lifecycle transitioned into S3 Standard-IA or One-Zone IA
+	- A single rule cannot transition into Standard-IA or One Zone-IA and THEN to glacier classes within 30 days (30 days required from Standard to Standard-IA/One Zone-IA, another 30 days required from that to glacier classes)

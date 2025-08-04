@@ -1,0 +1,5 @@
+- Typically, apps can be thought of as monolithic, which means they are all part of one system.
+- For example if we think about YouTube, we could think of it as upload, process, store and manage. All of these three tiers would be combined together into one monolithic application that runs, scales, bills and fails together.
+	- Keep in mind, because the whole application needs to scale, it's not cost efficient
+- A better way but still not perfect is splitting into tiers. For example, an upload, processing, and store and manage tier. This combined with internal load balancers allows for a level of abstraction, and allows each tier to scale independently to respond to the load placed on that tier
+	- However, the tiers still need the other tiers functioning as they still rely on each other. We can't run an upload function if the processing tier isn't working -> which means it still has similar issues to our monolithic architecture in terms of failure being through the whole system.

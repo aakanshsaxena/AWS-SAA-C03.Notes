@@ -1,0 +1,11 @@
+- Simplify managing access to S3 buckets/objects
+- Normally, we would create one S3 bucket, but we might want to differentiate what different people can access within the bucket and what permissions they have (can be complicated using a bucket policy)
+- Instead, we can create many access points, each one has its own policies, network access controls, and its own endpoint address
+- We can create this using the console or by using the CLI (aws s3control create-access-point --name *name* --account-id *account-id* --bucket *bucketname*)
+Example
+- Let's say we have an S3 bucket and we have three unique groups that need access to it, along with a VPC that has access.
+- We can create access points for each one of the groups, which conceptually makes each into a mini bucket with its own bucket policy (access point policy)
+	- These can restrict identities to certain prefixes, tags, or actions. 
+- Each access point has a unique DNS address for network access 
+- The bucket policy and access point policies must have matching permissions or delegation. Common way is to give bucket policy open access, and then control within the access points.
+- Access points can be configured for access via a VPC - requires a VPC endpoint. We can restrict access via this route through endpoint policies.

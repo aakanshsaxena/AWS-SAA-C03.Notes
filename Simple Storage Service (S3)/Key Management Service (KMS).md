@@ -1,0 +1,41 @@
+- Regional and a public service
+- Allows us to create, manage, and store keys
+- For both symmetric (one key to decrypt and encrypt) and asymmetric (one key to decrypt, seperate key to encrypt) keys
+- Capable of cryptographic operations (encrypt, decrypt, ...)
+- Main function is to ensure that keys never leave KMS - provides FIPS 140-2 Level 2 compliance (US Security Standard)
+- KMS Keys are the things that KMS manages
+- These are logical and contain the ID, date, policy, description, and state of the keys
+- They are backed by the physical key material
+- They can either be generated or imported
+- Can be used for up to 4KB of data (sounds serious, but typically keys are only used on small bits of data or to generate other keys)
+KMS and KMS Keys
+- Very granular with permissions (each cryptographic operation requires seperate permissions (creation, encryption, decryption, ...))
+- The KMS key is always stored encrypted, never plaintext
+- The KMS Key never leaves KMS
+Data Encryption Keys (DEKs)
+- They work around for data over >4KB
+- Created using a specific KMS key, and that specific KMS key can encrypt and decrypt the DEK it creates
+- GenerateDataKey
+	- Gives you the plaintext version of the DEK, and the ciphertext version of the DEK
+	- You encrypt the data (not with KMS, on your own) using the plaintext key
+	- Discard the plaintext key
+	- Store the encrypted data and encrypted version of the DEK
+	- Whenever you need to decrypt, you give the encrypted DEK to the same KMS Key and it will decrypt it back into plaintext for you
+	- Use the plaintext key to decrypt the encrypted data
+Key Concepts
+- KMS keys are isolated to a region and never leave
+- There are multi-region keys that exist if needed
+- Two types of keys 
+	- AWS Owned - created and managed by an AWS service for multiple AWS accounts (we don't need to worry about these)
+	- Customer Owned 
+		- AWS Managed - created automatically by AWS when you use a service that integrates with KMS (like S3)
+		- Customer Managed - created and owned by a customer to use
+- Customer managed keys are more configurable 
+- KMS Keys support rotation (AWS managed require once a year, customer managed don't require)
+- Backing Key (and previous backing keys) - are saved after rotation so we can decrypt data that was encrypted with an old key
+- Aliases = shortcuts to keys 
+Key Policies and Security
+- Key policies are a resource, every key has one
+- Key policies must be told to explicitly trust the AWS account they are contained within (unlike other AWS service)
+- Explicitly add key permissions to the key policy itself
+- Generally use a combination of key policies, trusting the account, and then identity policies to allow IAM policies to interact with the keys 

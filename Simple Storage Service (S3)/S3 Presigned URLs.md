@@ -1,0 +1,20 @@
+- A way to give another person or application access to an object inside an S3 bucket using your credentials
+- Typically, if we want to give some user access to an object in S3, we have three options:
+	- Create an IAM identity for the user
+	- Make the bucket public
+	- Provide AWS credentials
+- Presigned URLs solve this by:
+	- Using an authorized IAM User (let's say IAMADMIN) goes to generate a presigned URL
+	- The presigned URL lets the person using it assume the IAMADMIN identity just for viewing that specific object until it's expiry date and time
+	- You can use this URL for either Upload (PUT) or Download (GET) operations
+- We can also use it in another way:
+	- Let's say we have a web app that hosts media
+	- We want the user to be able to see the media, but we want to store the media on a private S3 bucket
+	- The user makes a request to the server -> the server knows that the media exists and as a designated IAM user makes a request to S3 for a pre-signed URL to the media -> S3 creates the URL and gives it back to the server -> the server gives it to the user who can now directly access that media in S3 through the presigned URL
+	- Often used when you offload media onto S3 or as part of serverless architectures
+**Exam Powerups**
+- You can create a URL for an object you have no access to (but it wouldn't have access either)
+- When using the URL, the permissions match the identity which generated it
+- Access denied could mean that the generating ID never had access or doesn't have access right now
+- Don't generate with a role, URL stops working when temporary credentials expire which might be sooner than the URL expires
+- You can create a presigned URL for an object that doesn't object

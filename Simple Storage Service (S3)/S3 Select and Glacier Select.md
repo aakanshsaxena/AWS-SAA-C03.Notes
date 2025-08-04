@@ -1,0 +1,5 @@
+- Typically when we interact with an object in S3 or Glacier we want to interact with the whole object
+- However when we get to bigger size objects like S3 MAX - 5TB, it takes time, costs, and 5TB to retrieve an object like that
+- Filtering at the client would still have these downsides
+- S3/Glacier Select let you use SQL-like statements to select part of the object, pre-filtered by S3 (saves time and money). 
+	- Works on CSV, JSON, Parquet, BZIP2 Compression for CSV and JSON
